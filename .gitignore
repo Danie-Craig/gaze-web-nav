@@ -1,0 +1,7 @@
+﻿.auth/
+*.zip
+*.tar
+*.tar.gz
+data/
+__pycache__/
+*.pyc
