@@ -5,3 +5,5 @@
 data/
 __pycache__/
 *.pyc
+
+data_collection/recordings/
