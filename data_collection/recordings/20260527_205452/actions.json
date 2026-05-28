@@ -1,0 +1,234 @@
+[
+  {
+    "step": 0,
+    "type": "scroll",
+    "timestamp": 1779940501.1972525,
+    "screenshot": "0000_scroll.png",
+    "scrollX": 0,
+    "scrollY": 94.66666412353516
+  },
+  {
+    "step": 1,
+    "type": "scroll",
+    "timestamp": 1779940504.9767904,
+    "screenshot": "0001_scroll.png",
+    "scrollX": 0,
+    "scrollY": 40
+  },
+  {
+    "step": 2,
+    "type": "scroll",
+    "timestamp": 1779940505.2394443,
+    "screenshot": "0002_scroll.png",
+    "scrollX": 0,
+    "scrollY": 300
+  },
+  {
+    "step": 3,
+    "type": "scroll",
+    "timestamp": 1779940505.646406,
+    "screenshot": "0003_scroll.png",
+    "scrollX": 0,
+    "scrollY": 500
+  },
+  {
+    "step": 4,
+    "type": "scroll",
+    "timestamp": 1779940506.475715,
+    "screenshot": "0004_scroll.png",
+    "scrollX": 0,
+    "scrollY": 592.6666870117188
+  },
+  {
+    "step": 5,
+    "type": "scroll",
+    "timestamp": 1779940507.132416,
+    "screenshot": "0005_scroll.png",
+    "scrollX": 0,
+    "scrollY": 676.6666870117188
+  },
+  {
+    "step": 6,
+    "type": "scroll",
+    "timestamp": 1779940507.4232454,
+    "screenshot": "0006_scroll.png",
+    "scrollX": 0,
+    "scrollY": 1000
+  },
+  {
+    "step": 7,
+    "type": "scroll",
+    "timestamp": 1779940507.8260298,
+    "screenshot": "0007_scroll.png",
+    "scrollX": 0,
+    "scrollY": 1083.3333740234375
+  },
+  {
+    "step": 8,
+    "type": "scroll",
+    "timestamp": 1779940509.5601032,
+    "screenshot": "0008_scroll.png",
+    "scrollX": 0,
+    "scrollY": 14
+  },
+  {
+    "step": 9,
+    "type": "scroll",
+    "timestamp": 1779940509.860931,
+    "screenshot": "0009_scroll.png",
+    "scrollX": 0,
+    "scrollY": 400
+  },
+  {
+    "step": 10,
+    "type": "scroll",
+    "timestamp": 1779940510.1469288,
+    "screenshot": "0010_scroll.png",
+    "scrollX": 0,
+    "scrollY": 719.3333129882812
+  },
+  {
+    "step": 11,
+    "type": "scroll",
+    "timestamp": 1779940510.4067054,
+    "screenshot": "0011_scroll.png",
+    "scrollX": 0,
+    "scrollY": 800
+  },
+  {
+    "step": 12,
+    "type": "scroll",
+    "timestamp": 1779940510.669073,
+    "screenshot": "0012_scroll.png",
+    "scrollX": 0,
+    "scrollY": 991.3333129882812
+  },
+  {
+    "step": 13,
+    "type": "scroll",
+    "timestamp": 1779940510.9210668,
+    "screenshot": "0013_scroll.png",
+    "scrollX": 0,
+    "scrollY": 1100
+  },
+  {
+    "step": 14,
+    "type": "scroll",
+    "timestamp": 1779940511.458488,
+    "screenshot": "0014_scroll.png",
+    "scrollX": 0,
+    "scrollY": 1038.6666259765625
+  },
+  {
+    "step": 15,
+    "type": "scroll",
+    "timestamp": 1779940511.7060356,
+    "screenshot": "0015_scroll.png",
+    "scrollX": 0,
+    "scrollY": 600
+  },
+  {
+    "step": 16,
+    "type": "scroll",
+    "timestamp": 1779940511.9801748,
+    "screenshot": "0016_scroll.png",
+    "scrollX": 0,
+    "scrollY": 200
+  },
+  {
+    "step": 17,
+    "type": "scroll",
+    "timestamp": 1779940512.383101,
+    "screenshot": "0017_scroll.png",
+    "scrollX": 0,
+    "scrollY": 278
+  },
+  {
+    "step": 18,
+    "type": "scroll",
+    "timestamp": 1779940512.6745455,
+    "screenshot": "0018_scroll.png",
+    "scrollX": 0,
+    "scrollY": 400
+  },
+  {
+    "step": 19,
+    "type": "click",
+    "timestamp": 1779940513.3160331,
+    "screenshot": "0019_click.png",
+    "x": 925,
+    "y": 298
+  },
+  {
+    "step": 20,
+    "type": "scroll",
+    "timestamp": 1779940513.8744557,
+    "screenshot": "0020_scroll.png",
+    "scrollX": 0,
+    "scrollY": 326.6666564941406
+  },
+  {
+    "step": 21,
+    "type": "scroll",
+    "timestamp": 1779940514.1375716,
+    "screenshot": "0021_scroll.png",
+    "scrollX": 0,
+    "scrollY": 200
+  },
+  {
+    "step": 22,
+    "type": "scroll",
+    "timestamp": 1779940514.5283988,
+    "screenshot": "0022_scroll.png",
+    "scrollX": 0,
+    "scrollY": 0
+  },
+  {
+    "step": 23,
+    "type": "scroll",
+    "timestamp": 1779940514.8751366,
+    "screenshot": "0023_scroll.png",
+    "scrollX": 0,
+    "scrollY": 200
+  },
+  {
+    "step": 24,
+    "type": "scroll",
+    "timestamp": 1779940515.1593845,
+    "screenshot": "0024_scroll.png",
+    "scrollX": 0,
+    "scrollY": 500
+  },
+  {
+    "step": 25,
+    "type": "scroll",
+    "timestamp": 1779940515.44618,
+    "screenshot": "0025_scroll.png",
+    "scrollX": 0,
+    "scrollY": 392
+  },
+  {
+    "step": 26,
+    "type": "scroll",
+    "timestamp": 1779940515.7113225,
+    "screenshot": "0026_scroll.png",
+    "scrollX": 0,
+    "scrollY": 100
+  },
+  {
+    "step": 27,
+    "type": "scroll",
+    "timestamp": 1779940515.9797359,
+    "screenshot": "0027_scroll.png",
+    "scrollX": 0,
+    "scrollY": 16.66666603088379
+  },
+  {
+    "step": 28,
+    "type": "click",
+    "timestamp": 1779940519.2051363,
+    "screenshot": "0028_click.png",
+    "x": 669,
+    "y": 92
+  }
+]
