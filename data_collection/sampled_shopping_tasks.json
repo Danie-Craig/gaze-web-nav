@@ -1,0 +1,202 @@
+[
+  {
+    "task_id": 574,
+    "intent": "I recently moved, my address is 111 Magnolia Path, Atlanta, GA, 30303, update my information on OneStopShopping accordingly"
+  },
+  {
+    "task_id": 159,
+    "intent": "I have a lot of Nintendo Switch game cards now, help me find the best storage option to fit all 31 cards"
+  },
+  {
+    "task_id": 47,
+    "intent": "Today is 6/12/2023. Tell me how many fulfilled orders I have over the past month, and the total amount of money I spent."
+  },
+  {
+    "task_id": 276,
+    "intent": "Search for \"switch accessories\""
+  },
+  {
+    "task_id": 264,
+    "intent": "I want to browse the products in the Cabinets, Racks & Shelves category"
+  },
+  {
+    "task_id": 242,
+    "intent": "I am doing a market survey for one stop market, show me the most expensive product from Household Supplies category"
+  },
+  {
+    "task_id": 166,
+    "intent": "What are the main criticisms of this product? Please extract the relevant sentences."
+  },
+  {
+    "task_id": 150,
+    "intent": "What is the price configuration of the fake tree I bought Jan 2023"
+  },
+  {
+    "task_id": 656,
+    "intent": "Fill the \"contact us\" form in the site for a refund on the remote controller I bought, stating that it broke after just three days of use. Also, ensure to include the order number #180 and the product SKU. Don't submit yet, I will check."
+  },
+  {
+    "task_id": 506,
+    "intent": "Buy the highest rated product from the meat substitute category within a budget between 100 and 200."
+  },
+  {
+    "task_id": 146,
+    "intent": "What is the size configuration of the picture frame I bought Sep 2022"
+  },
+  {
+    "task_id": 518,
+    "intent": "Add this product to my wishlist"
+  },
+  {
+    "task_id": 352,
+    "intent": "List products from nutrition bars and drinks category by ascending price"
+  },
+  {
+    "task_id": 49,
+    "intent": "Today is 6/12/2023. Tell me how many fulfilled orders I have over the past four month, and the total amount of money I spent."
+  },
+  {
+    "task_id": 48,
+    "intent": "Today is 6/12/2023. Tell me how many fulfilled orders I have over the past three days, and the total amount of money I spent."
+  },
+  {
+    "task_id": 147,
+    "intent": "What is the size configuration of the picture frame I bought 2022"
+  },
+  {
+    "task_id": 240,
+    "intent": "I am doing a market survey for one stop market, show me the most expensive product from competitive swimwear category"
+  },
+  {
+    "task_id": 261,
+    "intent": "I want to browse the products in the Headphones category"
+  },
+  {
+    "task_id": 436,
+    "intent": "I previously ordered some a mattress foundation around Feb or March 2023 and later cancelled. Can you reorder it for me?"
+  },
+  {
+    "task_id": 521,
+    "intent": "Subscribe to the newsletter of OneStopMarket"
+  },
+  {
+    "task_id": 796,
+    "intent": "Change the delivery address for my most recent order to 155 5th Street, San Francisco, CA."
+  },
+  {
+    "task_id": 510,
+    "intent": "Buy the best rating product from \"Home Audio Speaker\" category with at least 5 reviews and the product is least expensive"
+  },
+  {
+    "task_id": 233,
+    "intent": "Get the order number of my most recent complete order "
+  },
+  {
+    "task_id": 691,
+    "intent": "Draft an email to the shop owner via their contact us function for a coupon as I plan to make a bulk purchase"
+  },
+  {
+    "task_id": 351,
+    "intent": "List products from PS4 accessories category by ascending price"
+  },
+  {
+    "task_id": 241,
+    "intent": "I am doing a market survey for one stop market, show me the most expensive product from skin care tool category"
+  },
+  {
+    "task_id": 360,
+    "intent": "Show me the product names for order number 148."
+  },
+  {
+    "task_id": 517,
+    "intent": "Add this product to my wishlist"
+  },
+  {
+    "task_id": 277,
+    "intent": "Search for \"batteries for iphone 13\""
+  },
+  {
+    "task_id": 22,
+    "intent": "List out reviewers, if exist, who mention about under water photo"
+  },
+  {
+    "task_id": 191,
+    "intent": "Tell me the total cost of my latest processing order?"
+  },
+  {
+    "task_id": 657,
+    "intent": "Fill the \"contact us\" form in the site for a refund on the speaker I bought, stating that it broke after just three days of use. Also, ensure to include the order number #148 and the product SKU. Don't submit yet, I will check."
+  },
+  {
+    "task_id": 319,
+    "intent": "How much refund I should expect from my order canlled in April 2022, including shipping fee"
+  },
+  {
+    "task_id": 531,
+    "intent": "Draft a refund message via their \"contact us\" form for the phone case I bought March 2023. It broke after three days of use. The shop requires the order id, the reason and the amount to refund in the message. Don't submit yet"
+  },
+  {
+    "task_id": 190,
+    "intent": "Tell me the total cost of my latest complete order?"
+  },
+  {
+    "task_id": 653,
+    "intent": "Fill the \"contact us\" form in the site for a refund on the phone screen protector I bought, stating that it broke after just three days of use. Also, ensure to include the order number #000000180 and the product SKU. Don't submit yet, I will check."
+  },
+  {
+    "task_id": 313,
+    "intent": "Which number to call for the customer service?"
+  },
+  {
+    "task_id": 693,
+    "intent": "Draft an email to the shop owner via their contact us function for a coupon as my refund is suppoed to be replaced by a coupon"
+  },
+  {
+    "task_id": 654,
+    "intent": "Fill the \"contact us\" form in the site for a refund on the bluetooth speaker I bought, stating that it broke after just three days of use. Also, ensure to include the order number #161 and the product SKU. Don't submit yet, I will check."
+  },
+  {
+    "task_id": 329,
+    "intent": "How much I spend on 4/19/2023 on shopping at One Stop Market?"
+  },
+  {
+    "task_id": 148,
+    "intent": "What is the color configuration of the picture frame I bought Sep 2022"
+  },
+  {
+    "task_id": 323,
+    "intent": "How much refund I should expect from my order canlled in 2022/03? I only kept the AC-DC Adapter and the shop told me that I cannot get the shipping fee back"
+  },
+  {
+    "task_id": 320,
+    "intent": "How much refund I should expect from my order canlled in Feb 2023, including shipping fee"
+  },
+  {
+    "task_id": 273,
+    "intent": "Show me products under $199 in \"furtiture with accent\" category"
+  },
+  {
+    "task_id": 96,
+    "intent": "Tell me the status of my latest order and when will it arrive"
+  },
+  {
+    "task_id": 368,
+    "intent": "find discounted items."
+  },
+  {
+    "task_id": 468,
+    "intent": "Add DkRgVNY Lace Spcling Lingerie Womens Sexy Hollow Out Underwear Bodysuit One Piece Snap Crotch Clubwear Teddy Bodysuit to my wish list"
+  },
+  {
+    "task_id": 162,
+    "intent": "I have a lot of Nintendo Switch game cards now, help me find the best storage option to fit all 40 cards"
+  },
+  {
+    "task_id": 328,
+    "intent": "Show me the \"iphone 12 phone case\" listings by price."
+  },
+  {
+    "task_id": 144,
+    "intent": "How much I spent on food shopping during from mid Jan to the end Jan 2023"
+  }
+]
