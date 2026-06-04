@@ -1,0 +1,39 @@
+### ── Model ───────────────────────────────────────────────────────────────────
+model_name_or_path: /data/gaze-web-nav-training/models/UI-TARS-1.5-7B
+trust_remote_code: true
+
+### ── Training method ─────────────────────────────────────────────────────────
+stage: sft
+do_train: true
+finetuning_type: lora
+
+### ── QLoRA (4-bit) — fits 7B model in 12GB VRAM ────────────────────────────
+quantization_bit: 4
+quantization_method: bitsandbytes
+
+### ── LoRA ─────────────────────────────────────────────────────────────────────
+lora_rank: 64
+lora_alpha: 128
+lora_dropout: 0.05
+lora_target: all          # apply LoRA to all linear layers
+
+### ── Dataset ────────────────────────────────────────────────────────────────
+dataset: webarena_bc
+dataset_dir: /home/liralab-widowx/gaze-web-nav/training/dataset
+template: qwen2_vl        # UI-TARS-1.5 is built on Qwen2.5-VL
+cutoff_len: 1024
+
+### ── Training hyperparameters ───────────────────────────────────────────────
+per_device_train_batch_size: 1
+gradient_accumulation_steps: 4     # effective batch size = 4
+learning_rate: 1.0e-4
+num_train_epochs: 3
+lr_scheduler_type: cosine
+warmup_ratio: 0.1
+bf16: true
+
+### ── Logging & checkpointing ────────────────────────────────────────────────
+logging_steps: 10
+save_steps: 100
+output_dir: /data/gaze-web-nav-training/outputs/bc_baseline
+overwrite_output_dir: true
