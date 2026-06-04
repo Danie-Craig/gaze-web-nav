@@ -5,7 +5,6 @@ import time
 import os
 import threading
 import shutil
-import urllib.parse
 from datetime import datetime
 from playwright.async_api import async_playwright
 
@@ -17,7 +16,8 @@ OUTPUT_DIR = "./recordings"
 SCROLL_THRESHOLD = 50
 HOVER_CLICK_TIMEOUT = 5.0
 HOVER_MOVE_THRESHOLD = 10  # pixels
-GAZE_ENABLED = False  # Set to True when GazePoint is connected
+GAZE_ENABLED = True
+
 
 def suppress_exception(task):
     """Suppress Future exception warnings for expected browser-close errors."""
@@ -29,31 +29,33 @@ def suppress_exception(task):
         except Exception:
             pass
 
+
 # JS listeners — injected on every page via add_init_script
 JS_LISTENERS = """
-    // Mousedown — fires BEFORE navigation
-    document.addEventListener('mousedown', function(e) {
+    // Mousedown — async + await so screenshot is taken before browser
+    // dispatches click/navigation events.
+    document.addEventListener('mousedown', async function(e) {
         if (e.button !== 0) return;
 
         // SELECT elements handled separately
         if (e.target.tagName === 'SELECT') {
             if (typeof window.__reportSelectClick === 'function') {
-                window.__reportSelectClick(e.clientX, e.clientY);
+                await window.__reportSelectClick(e.clientX, e.clientY);
             }
             return;
         }
 
-        // Report type FIRST (before click) if field was active
         if (window.__activeField && window.__activeField.active && window.__activeField.value.length > 0) {
-            if (typeof window.__reportType === 'function') {
-                window.__reportType(window.__activeField.value, 'click');
+            // Combine type + click into ONE CDP call so there is no gap between
+            // them where navigation could fire and destroy the JS context.
+            if (typeof window.__reportTypeAndClick === 'function') {
+                await window.__reportTypeAndClick(window.__activeField.value, e.clientX, e.clientY);
             }
             window.__activeField.active = false;
-        }
-
-        // Then report click
-        if (typeof window.__reportClick === 'function') {
-            window.__reportClick(e.clientX, e.clientY);
+        } else {
+            if (typeof window.__reportClick === 'function') {
+                await window.__reportClick(e.clientX, e.clientY);
+            }
         }
     });
 
@@ -71,6 +73,7 @@ JS_LISTENERS = """
         window.__lastScroll = {
             scrollX: isPage ? window.scrollX : target.scrollLeft,
             scrollY: isPage ? window.scrollY : target.scrollTop,
+            isPage: isPage,
             t: Date.now()
         };
     }, true);
@@ -79,29 +82,21 @@ JS_LISTENERS = """
     var TEXT_INPUT_TYPES = ['text', 'email', 'password', 'number', 'search', 'tel', 'url', ''];
     function handleFieldChange(e) {
         if (e.target.tagName === 'TEXTAREA') {
-            window.__activeField = {
-                value: e.target.value,
-                t: Date.now(),
-                active: true
-            };
+            window.__activeField = { value: e.target.value, t: Date.now(), active: true };
             return;
         }
         if (e.target.tagName === 'INPUT') {
             if (TEXT_INPUT_TYPES.indexOf(e.target.type.toLowerCase()) === -1) return;
-            window.__activeField = {
-                value: e.target.value,
-                t: Date.now(),
-                active: true
-            };
+            window.__activeField = { value: e.target.value, t: Date.now(), active: true };
         }
     }
     document.addEventListener('input', handleFieldChange);
 
-    // Capture type on Tab — via expose_function for correct ordering
-    document.addEventListener('keydown', function(e) {
-        if (e.key === 'Tab' && window.__activeField && window.__activeField.active) {
+    // Capture type on Tab or Enter — async so screenshot is taken before form submits
+    document.addEventListener('keydown', async function(e) {
+        if ((e.key === 'Tab' || e.key === 'Enter') && window.__activeField && window.__activeField.active) {
             if (typeof window.__reportType === 'function') {
-                window.__reportType(window.__activeField.value, 'Tab');
+                await window.__reportType(window.__activeField.value, e.key);
             }
             window.__activeField.active = false;
         }
@@ -123,32 +118,24 @@ JS_LISTENERS = """
     window.__lastHover = null;
     document.addEventListener('mouseover', function(e) {
         if (window.__isScrolling) return;
-        window.__lastHover = {
-            x: e.clientX,
-            y: e.clientY,
-            t: Date.now(),
-            domChanged: false
-        };
+        window.__lastHover = { x: e.clientX, y: e.clientY, t: Date.now(), domChanged: false };
         var observer = new MutationObserver(function(mutations) {
             if (!window.__isScrolling && window.__lastHover) {
                 window.__lastHover.domChanged = true;
             }
             observer.disconnect();
         });
-        observer.observe(document.body, {
-            childList: true,
-            subtree: true,
-            attributes: true
-        });
+        observer.observe(document.body, { childList: true, subtree: true, attributes: true });
         setTimeout(function() { observer.disconnect(); }, 500);
     });
 """
 
-# Global
+# Globals
 gaze_data = []
 gaze_lock = threading.Lock()
 recording = True
 browser_open = True
+
 
 def read_gaze(sock):
     buffer = ""
@@ -168,6 +155,7 @@ def read_gaze(sock):
             print(f"Gaze error: {e}")
             break
 
+
 def connect_gazepoint():
     sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     sock.connect((GAZE_HOST, GAZE_PORT))
@@ -177,23 +165,37 @@ def connect_gazepoint():
     print("GazePoint connected!")
     return sock
 
+
 async def main():
     global recording, browser_open
 
-    # Suppress Future exception warnings from Playwright internals on browser close
     loop = asyncio.get_event_loop()
     def handle_exception(loop, context):
-        exc = context.get('exception')
+        exc = context.get("exception")
         if exc and ("closed" in str(exc).lower() or "target" in str(exc).lower()):
-            return  # Suppress expected browser-close errors
+            return
         loop.default_exception_handler(context)
     loop.set_exception_handler(handle_exception)
 
+    task_id = input("Task ID (e.g. 574): ").strip()
+    trajectory = input("Trajectory (e.g. 1): ").strip()
+
     timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
-    session_dir = os.path.join(OUTPUT_DIR, timestamp)
+    session_dir = os.path.join(OUTPUT_DIR, f"task{task_id}_traj{trajectory}")
     os.makedirs(session_dir, exist_ok=True)
     screenshots_dir = os.path.join(session_dir, "screenshots")
     os.makedirs(screenshots_dir, exist_ok=True)
+
+    session_info = {
+        "task_id": task_id,
+        "trajectory": trajectory,
+        "timestamp": timestamp,
+        "gaze_enabled": GAZE_ENABLED,
+        "task_url": TASK_URL,
+    }
+    with open(os.path.join(session_dir, "session_info.json"), "w") as f:
+        json.dump(session_info, f, indent=2)
+
     print(f"Session directory: {session_dir}")
 
     gaze_sock = None
@@ -215,6 +217,13 @@ async def main():
     last_click_pos = [0, 0]
     last_nav_time = [0]
 
+    async def take_screenshot():
+        """Take a screenshot and return bytes, or None on failure."""
+        try:
+            return await page_ref[0].screenshot()
+        except Exception:
+            return None
+
     async def save_action(action_type, details={}):
         async with save_lock:
             t = time.time()
@@ -223,8 +232,8 @@ async def main():
             try:
                 await page_ref[0].screenshot(path=filepath)
             except Exception as e:
-                print(f"Screenshot error: {e}")
-                return
+                print(f"⚠ Screenshot failed at step {step[0]} ({action_type}): {e}")
+                filename = None
             entry = {"step": step[0], "type": action_type, "timestamp": t, "screenshot": filename}
             entry.update(details)
             actions.append(entry)
@@ -240,45 +249,85 @@ async def main():
                 with open(filepath, "wb") as f:
                     f.write(screenshot_bytes)
             except Exception as e:
-                print(f"Screenshot error: {e}")
-                return
+                print(f"⚠ File write failed at step {step[0]} ({action_type}): {e}")
+                filename = None
             entry = {"step": step[0], "type": action_type, "timestamp": t, "screenshot": filename}
             entry.update(details)
             actions.append(entry)
             print(f"Step {step[0]}: {action_type} - {details}")
             step[0] += 1
 
+    def _save_click(x, y, screenshot_bytes):
+        """Return the coroutine to save a click step, using hover screenshot if available."""
+        now = time.time()
+        same_pos = (
+            abs(x - last_click_pos[0]) < 10 and
+            abs(y - last_click_pos[1]) < 10
+        )
+        if same_pos and now - last_click_time[0] < 0.3:
+            return None  # debounce
+        last_click_time[0] = now
+        last_click_pos[0] = x
+        last_click_pos[1] = y
+
+        if pending_hover[0] is not None:
+            elapsed = now - pending_hover[0]["timestamp"]
+            hx, hy = pending_hover[0]["x"], pending_hover[0]["y"]
+            distance = ((x - hx) ** 2 + (y - hy) ** 2) ** 0.5
+            # Only use hover screenshot if click is close to hover position —
+            # prevents a dropdown from a distant hover appearing in an unrelated click
+            if elapsed <= HOVER_CLICK_TIMEOUT and distance <= 100:
+                hover_bytes = pending_hover[0]["screenshot_bytes"]
+                pending_hover[0] = None
+                return save_action_with_bytes("click", hover_bytes, {"x": x, "y": y})
+            else:
+                pending_hover[0] = None
+
+        if screenshot_bytes:
+            return save_action_with_bytes("click", screenshot_bytes, {"x": x, "y": y})
+        else:
+            return save_action("click", {"x": x, "y": y})
+
     async def on_type_callback(value, trigger):
+        """Called from keydown handler (Tab or Enter only)."""
         try:
-            await save_action("type", {"value": value, "trigger": trigger})
+            screenshot_bytes = await take_screenshot()
+            if screenshot_bytes:
+                await save_action_with_bytes("type", screenshot_bytes, {"value": value, "trigger": trigger})
+            else:
+                await save_action("type", {"value": value, "trigger": trigger})
         except Exception as e:
             if not ("closed" in str(e).lower() or "target" in str(e).lower()):
                 print(f"Type callback error: {e}")
 
-    async def on_click_callback(x, y):
+    async def on_type_and_click_callback(value, x, y):
+        """Called from mousedown when an active field exists.
+        Saves type + click in one CDP round-trip — no gap for navigation
+        to fire between them."""
         try:
-            now = time.time()
-            same_pos = (
-                abs(x - last_click_pos[0]) < 10 and
-                abs(y - last_click_pos[1]) < 10
-            )
-            if same_pos and now - last_click_time[0] < 0.3:
-                return
-            last_click_time[0] = now
-            last_click_pos[0] = x
-            last_click_pos[1] = y
+            screenshot_bytes = await take_screenshot()
 
-            if pending_hover[0] is not None:
-                elapsed = now - pending_hover[0]["timestamp"]
-                if elapsed <= HOVER_CLICK_TIMEOUT:
-                    hover_bytes = pending_hover[0]["screenshot_bytes"]
-                    pending_hover[0] = None
-                    await save_action_with_bytes("click", hover_bytes, {"x": x, "y": y})
-                    return
-                else:
-                    pending_hover[0] = None
+            # Save type step
+            if screenshot_bytes:
+                await save_action_with_bytes("type", screenshot_bytes, {"value": value, "trigger": "click"})
+            else:
+                await save_action("type", {"value": value, "trigger": "click"})
 
-            await save_action("click", {"x": x, "y": y})
+            # Save click step
+            coro = _save_click(x, y, screenshot_bytes)
+            if coro is not None:
+                await coro
+        except Exception as e:
+            if not ("closed" in str(e).lower() or "target" in str(e).lower()):
+                print(f"Type+click callback error: {e}")
+
+    async def on_click_callback(x, y):
+        """Called from mousedown when NO active field exists (pure click)."""
+        try:
+            screenshot_bytes = await take_screenshot()
+            coro = _save_click(x, y, screenshot_bytes)
+            if coro is not None:
+                await coro
         except Exception as e:
             if not ("closed" in str(e).lower() or "target" in str(e).lower()):
                 print(f"Click callback error: {e}")
@@ -298,8 +347,12 @@ async def main():
                 filename = f"{step[0]:04d}_select.png"
                 filepath = os.path.join(screenshots_dir, filename)
                 if pending_select_screenshot[0]:
-                    with open(filepath, "wb") as f:
-                        f.write(pending_select_screenshot[0])
+                    try:
+                        with open(filepath, "wb") as f:
+                            f.write(pending_select_screenshot[0])
+                    except Exception as e:
+                        print(f"⚠ Select file write failed: {e}")
+                        filename = None
                     pending_select_screenshot[0] = None
                 else:
                     try:
@@ -307,15 +360,11 @@ async def main():
                     except Exception as e:
                         if "closed" in str(e).lower() or "target" in str(e).lower():
                             return
-                        print(f"Select screenshot error: {e}")
-                        return
+                        print(f"⚠ Select screenshot failed: {e}")
+                        filename = None
                 entry = {
-                    "step": step[0],
-                    "type": "select",
-                    "timestamp": t,
-                    "screenshot": filename,
-                    "value": value,
-                    "label": label
+                    "step": step[0], "type": "select", "timestamp": t,
+                    "screenshot": filename, "value": value, "label": label
                 }
                 actions.append(entry)
                 print(f"Step {step[0]}: select - {{'value': '{value}', 'label': '{label}'}}")
@@ -343,38 +392,20 @@ async def main():
 
     print("Starting browser...")
     async with async_playwright() as p:
-        browser = await p.chromium.launch(
-            headless=False,
-            args=["--start-maximized"]
-        )
+        browser = await p.chromium.launch(headless=False, args=["--start-maximized"])
         context = await browser.new_context(no_viewport=True)
         page = await context.new_page()
         page_ref[0] = page
 
         await page.expose_function("__reportType", on_type_callback)
+        await page.expose_function("__reportTypeAndClick", on_type_and_click_callback)
         await page.expose_function("__reportClick", on_click_callback)
         await page.expose_function("__reportSelectClick", on_select_click_callback)
         await page.expose_function("__reportSelect", on_select_callback)
         await page.add_init_script(JS_LISTENERS)
 
         page.on("framenavigated", lambda frame:
-            asyncio.ensure_future(on_navigation(frame)).add_done_callback(suppress_exception))
-
-        async def on_request(request):
-            try:
-                if "q=" in request.url and request.is_navigation_request():
-                    parsed = urllib.parse.urlparse(request.url)
-                    params = urllib.parse.parse_qs(parsed.query)
-                    if "q" in params:
-                        query = params["q"][0].strip()
-                        if query:
-                            await save_action("type", {"value": query, "trigger": "search"})
-            except Exception as e:
-                if not ("closed" in str(e).lower() or "target" in str(e).lower()):
-                    print(f"Request handler error: {e}")
-
-        page.on("request", lambda req:
-            asyncio.ensure_future(on_request(req)).add_done_callback(suppress_exception))
+            asyncio.create_task(on_navigation(frame)).add_done_callback(suppress_exception))
 
         last_nav_time[0] = time.time()
         await page.goto(TASK_URL)
@@ -383,6 +414,7 @@ async def main():
 
         async def poll_actions():
             last_scroll_y = 0
+            last_scroll_is_page = True
             last_hover_pos = None
             last_url = [page_ref[0].url]
 
@@ -402,8 +434,7 @@ async def main():
                                 screenshot_bytes = await page.screenshot()
                                 pending_hover[0] = {
                                     "timestamp": time.time(),
-                                    "x": hx,
-                                    "y": hy,
+                                    "x": hx, "y": hy,
                                     "screenshot_bytes": screenshot_bytes
                                 }
                                 print(f"Hover stored at ({hx}, {hy}) — waiting for click...")
@@ -414,9 +445,16 @@ async def main():
                     scroll = await page.evaluate("window.__lastScroll || null")
                     if scroll:
                         current_url = page_ref[0].url
+                        scroll_is_page = scroll.get("isPage", True)
+
                         if current_url != last_url[0]:
                             last_url[0] = current_url
                             last_scroll_y = scroll["scrollY"]
+                            last_scroll_is_page = scroll_is_page
+                        elif scroll_is_page != last_scroll_is_page:
+                            # Switched scroll source — reset baseline without recording
+                            last_scroll_y = scroll["scrollY"]
+                            last_scroll_is_page = scroll_is_page
                         else:
                             delta = abs(scroll["scrollY"] - last_scroll_y)
                             if delta >= SCROLL_THRESHOLD:
@@ -432,7 +470,7 @@ async def main():
                     await asyncio.sleep(0.3)
                 await asyncio.sleep(0.1)
 
-        asyncio.ensure_future(poll_actions()).add_done_callback(suppress_exception)
+        asyncio.create_task(poll_actions()).add_done_callback(suppress_exception)
 
         print("Browser ready. Start browsing! Close browser when done.")
         await page.wait_for_event("close", timeout=0)
@@ -460,5 +498,6 @@ async def main():
 
     if GAZE_ENABLED and gaze_sock:
         gaze_sock.close()
+
 
 asyncio.run(main())
