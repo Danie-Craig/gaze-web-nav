@@ -9,7 +9,8 @@ finetuning_type: lora
 
 ### ── QLoRA (4-bit) — fits 7B model in 12GB VRAM ────────────────────────────
 quantization_bit: 4
-quantization_method: bitsandbytes
+quantization_type: nf4
+double_quantization: true
 
 ### ── LoRA ─────────────────────────────────────────────────────────────────────
 lora_rank: 64
@@ -18,7 +19,7 @@ lora_dropout: 0.05
 lora_target: all          # apply LoRA to all linear layers
 
 ### ── Dataset ────────────────────────────────────────────────────────────────
-dataset: webarena_bc
+dataset: webarena_bc_train
 dataset_dir: /home/liralab-widowx/gaze-web-nav/training/dataset
 template: qwen2_vl        # UI-TARS-1.5 is built on Qwen2.5-VL
 cutoff_len: 1024
@@ -29,7 +30,7 @@ gradient_accumulation_steps: 4     # effective batch size = 4
 learning_rate: 1.0e-4
 num_train_epochs: 3
 lr_scheduler_type: cosine
-warmup_ratio: 0.1
+warmup_steps: 45
 bf16: true
 
 ### ── Logging & checkpointing ────────────────────────────────────────────────
