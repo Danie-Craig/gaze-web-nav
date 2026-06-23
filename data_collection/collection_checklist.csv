@@ -1,0 +1,160 @@
+task_id,split,demos_needed,intent
+21,train,3,"List out reviewers, if exist, who mention about ear cups being small"
+24,train,3,"List out reviewers, if exist, who mention about price being unfair"
+25,train,3,"List out reviewers, if exist, who mention about average print quality"
+26,train,3,"List out reviewers, if exist, who mention about complain of the customer service"
+96,train,3,Tell me the status of my latest order and when will it arrive
+117,train,3,What is the date when I made my first purchase on this site?
+118,train,3,"I have jaw bruxism problem, show me something that could alleviate the problem."
+124,train,3,What is the price range of wireless earphone in the One Stop Market?
+125,train,3,What is the price range of teeth grinding mouth guard in the One Stop Market?
+126,train,3,What is the price range of Canon photo printer in the One Stop Market?
+141,train,3,How much I spent on food-related shopping during March 2023
+142,train,3,How much I spent on hair care and hair style shopping during Jan 2023
+143,train,3,How much I spent on home decoration shopping during 1/29/2023
+144,train,3,How much I spent on food shopping during from mid Jan to the end Jan 2023
+145,train,3,How much I spent on cooking and food shopping during March 2022
+148,train,3,What is the color configuration of the picture frame I bought Sep 2022
+149,train,3,What is the color configuration of the artifical plants I bought Feb 2023
+159,train,3,"I have a lot of Nintendo Switch game cards now, help me find the best storage option to fit all 31 cards"
+160,train,3,"I have a lot of Nintendo Switch game cards now, help me find the best storage option to fit all 6 cards"
+162,train,3,"I have a lot of Nintendo Switch game cards now, help me find the best storage option to fit all 40 cards"
+164,train,3,What are the main criticisms of this product? Please extract the relevant sentences.
+166,train,3,What are the main criticisms of this product? Please extract the relevant sentences.
+167,train,3,What are the main criticisms of this product? Please extract the relevant sentences.
+188,train,3,Tell me the total cost of my latest cancelled order?
+189,train,3,Tell me the total cost of my latest pending order?
+191,train,3,Tell me the total cost of my latest processing order?
+192,train,3,Tell me the total cost of my latest non-cancelled order?
+225,train,3,What do customers say about brush from sephora
+226,train,3,What is the price range for products from Amazon basic?
+228,train,3,What is the price range for products from sephora?
+229,train,3,What is the price range for products from ugreen?
+230,train,3,What is the price range for products from Perricone MD?
+231,train,3,Get the order number of my most recent cancelled order 
+232,train,3,Get the order number of my most recent pending order 
+234,train,3,Get the order number of my most recent on hold order 
+235,train,3,Get the order number of my most recent under delivery order 
+238,train,3,"I am doing a market survey for one stop market, show me the most expensive product from PS4 accessories category"
+239,train,3,"I am doing a market survey for one stop market, show me the most expensive product from nutrition bars and drinks category"
+242,train,3,"I am doing a market survey for one stop market, show me the most expensive product from Household Supplies category"
+262,train,3,I want to browse the products in the Men shoes category
+263,train,3,I want to browse the products in the Woman clothing category
+271,train,3,"Show me products under $46.99 in ""makeup remover"" category"
+273,train,3,"Show me products under $199 in ""furtiture with accent"" category"
+276,train,3,"Search for ""switch accessories"""
+278,train,3,"Search for ""green tea bag for weight loss"""
+279,train,3,"Provide me with the complete names of Bluetooth headphones from Sony, and also share the price range for the available models"
+280,train,3,"Provide me with the full names of chargers from Anker, and also share the price range for the available models"
+281,train,3,"Please provide me with the complete product names of Oral B brush heads designed for children, along with their corresponding price range per brush"
+282,train,3,List the full product names of slide slippers from Nike and tell me the price range of the available products
+285,train,3,Show the least expensive switch card holder with a minimum storage capacity of 15 cards.
+286,train,3,Show the least expensive ssd hard drive with a minimum storage capacity of 1TB.
+298,train,3,Show the most recent completed order
+299,train,3,Show the most recent cancelled order
+300,train,3,Show the most recent pending order
+301,train,3,Show the most recent processing order
+302,train,3,Show the most recent out of delivery order
+313,train,3,Which number to call for the customer service?
+319,train,3,"How much refund I should expect from my order canlled in April 2022, including shipping fee"
+320,train,3,"How much refund I should expect from my order canlled in Feb 2023, including shipping fee"
+321,train,3,"How much refund I should expect from my order canlled in 2022, including shipping fee"
+322,train,3,How much refund I should expect from my order canlled in May 2023 if I cannot get the shipping fee refunded?
+323,train,3,How much refund I should expect from my order canlled in 2022/03? I only kept the AC-DC Adapter and the shop told me that I cannot get the shipping fee back
+324,train,3,"Show me the ""chairs"" listings by ascending price."
+325,train,3,"Show me the ""mouth night guard"" listings by descending price."
+326,train,3,"Show me the ""Canon photo printer"" listings by search relevance, from most to least."
+327,train,3,"Show me the ""iphone 12 phone case"" listings by name alphabetically."
+328,train,3,"Show me the ""iphone 12 phone case"" listings by price."
+329,train,3,How much I spend on 4/19/2023 on shopping at One Stop Market?
+330,train,3,How much I spend in March 2023 on shopping at One Stop Market?
+331,train,3,How much I spend in July 2022 on shopping at One Stop Market?
+332,train,3,How much I spend each month from Jan to the end of March 2023 on shopping at One Stop Market?
+333,train,3,How much did I spend on shopping at One Stop Market on November 2022? They gave me a 20% discount on the total amount for orders exceeding $200 in cash
+334,train,3,Tell me when I last ordered my muffin cornbread mix?
+335,train,3,Tell me when I last ordered my body butter?
+336,train,3,Tell me when I last ordered my conditioner?
+337,train,3,Tell me when I last ordered my bread olive?
+338,train,3,Tell me when I last ordered my toothpaste?
+353,train,3,List products from competitive swimwear category by ascending price
+354,train,3,List products from living room furtniture category by descending price
+355,train,3,List products from kids' bedding category by descending price
+358,train,3,Show me the shipping method for order number 187.
+359,train,3,Show me the order date for order number 148.
+360,train,3,Show me the product names for order number 148.
+361,train,3,Show me the order statuses for order number 170 and 189.
+376,train,3,Summarize customer reviews for Amazon Echo Dot 3rd generation.
+384,train,3,List the customer names who complain about the quality of EYZUTAK phone cases
+385,train,3,List the customer names who thinks EYZUTAK phone cases are of good looking
+387,train,3,Who gave 4 or 5 stars for phone cases from EYZUTAK
+431,train,3,Add the product with the lowest per unit price from my open tabs to the shopping cart
+432,train,3,Add the product with the lowest per unit price from my open tabs to the shopping cart
+433,train,3,Add the product with the lowest per unit price from my open tabs to the shopping cart
+434,train,3,Add the product with the lowest per unit price from my open tabs to the shopping cart
+435,train,3,Add the product with the lowest per unit price from my open tabs to the shopping cart
+437,train,3,I previously ordered some a table lamp in May 2023 and later cancelled. Can you reorder it for me?
+438,train,3,I previously ordered some a TV stand sometime around sep 2022 and later cancelled. Can you reorder it for me?
+439,train,3,I previously ordered some a cat t-shirt during 2022 and later cancelled. Can you reorder it for me?
+465,train,3,"Add Tide PODS Spring Meadow Scent HE Turbo Laundry Detergent Pacs, 81 Count to my wish list"
+466,train,3,Add 2 Hawaiian Bamboo Orchid Roots #zc50 - by Discount Hawaiian Gifts to my wish list
+467,train,3,"Add HONGJ Hawaiian Beach Outfits Set for Mens, Summer Tropical Tree Printed Relaxed-fit Hawaii Shirts Shorts 2 Piece Suits to my wish list"
+468,train,3,Add DkRgVNY Lace Spcling Lingerie Womens Sexy Hollow Out Underwear Bodysuit One Piece Snap Crotch Clubwear Teddy Bodysuit to my wish list
+469,train,3,Add Light Blue Simple Summer New Low Heels Slippers for Women Fashion Chunky Heels Pointed Toe Wine Glasses Sandals Comfortable Walking Shoes Ladies All-Match Sexy Party Shoes to my wish list
+508,train,3,Buy the highest rated product from the NS switch pouch category within a budget under 60.
+509,train,3,"Buy the best rating product from ""Men's shoe"" category with at least 5 reviews and the product is least expensive"
+511,train,3,Add a laundry detergent to my wish list.
+512,train,3,Add a toothpaste to my wish list.
+513,train,3,Add a chair to my wish list.
+514,train,3,Add a white desk to my wish list.
+515,train,3,Add a white computer desk to my wish list.
+516,train,3,Add this product to my wishlist
+520,train,3,Add this product to my wishlist
+528,train,3,"Draft a refund message via their ""contact us"" form for the phone screen protector I bought March 2023. It broke after three days of use. The shop requires the order id, the reason and the amount to refund in the message. Don't submit yet"
+530,train,3,"Draft a refund message via their ""contact us"" form for the kitchen organizer I bought around Feb 2023. It broke after three days of use. The shop requires the order id, the reason and the amount to refund in the message. Don't submit yet"
+531,train,3,"Draft a refund message via their ""contact us"" form for the phone case I bought March 2023. It broke after three days of use. The shop requires the order id, the reason and the amount to refund in the message. Don't submit yet"
+532,train,3,"Draft a refund message via their ""contact us"" form for the PS3 remote controller I bought early 2023. It broke after three days of use. The shop requires the order id, the reason and the amount to refund in the message. Don't submit yet"
+571,train,3,"I recently moved, my address is 231 Willow Way, Suite 100, Chicago, IL, 60601, update my information on OneStopShopping accordingly"
+573,train,3,"I recently moved, my address is 987 Sycamore Circle, Philadelphia, PA, 19102, update my information on OneStopShopping accordingly"
+574,train,3,"I recently moved, my address is 111 Magnolia Path, Atlanta, GA, 30303, update my information on OneStopShopping accordingly"
+585,train,3,"Rate my recent purchase of floor lamp with 5 stars, using my nickname Emma Lopez?"
+588,train,3,"Rate my recent purchase of Foundation For Mattress With Frame Set with 1 stars, using my nickname ShoppingEmma?"
+589,train,3,"Rate my recent purchase of Mini Wireless Bluetooth Speaker with 2 stars, using my nickname SimpleEmma?"
+653,train,3,"Fill the ""contact us"" form in the site for a refund on the phone screen protector I bought, stating that it broke after just three days of use. Also, ensure to include the order number #000000180 and the product SKU. Don't submit yet, I will check."
+654,train,3,"Fill the ""contact us"" form in the site for a refund on the bluetooth speaker I bought, stating that it broke after just three days of use. Also, ensure to include the order number #161 and the product SKU. Don't submit yet, I will check."
+655,train,3,"Fill the ""contact us"" form in the site for a refund on the iphone case I bought, stating that it broke after just three days of use. Also, ensure to include the order number #180 and the product SKU. Don't submit yet, I will check."
+656,train,3,"Fill the ""contact us"" form in the site for a refund on the remote controller I bought, stating that it broke after just three days of use. Also, ensure to include the order number #180 and the product SKU. Don't submit yet, I will check."
+657,train,3,"Fill the ""contact us"" form in the site for a refund on the speaker I bought, stating that it broke after just three days of use. Also, ensure to include the order number #148 and the product SKU. Don't submit yet, I will check."
+692,train,3,Draft an email to the shop owner via their contact us function for a coupon as I am a student
+693,train,3,Draft an email to the shop owner via their contact us function for a coupon as my refund is suppoed to be replaced by a coupon
+792,train,3,Buy the highest rated product from the Beauty & Personal Care category within a budget under 20.
+793,train,3,Buy the highest rated product from the Men clothing category within a budget above 50 but under 129.99.
+794,train,3,"Change the delivery address for my most recent order to 4000 Forbes Ave, Pittsburgh, PA."
+797,train,3,"Change the delivery address for my most recent order to 3 Oxford St, Cambridge, MA."
+22,val,3,"List out reviewers, if exist, who mention about under water photo"
+47,val,3,"Today is 6/12/2023. Tell me how many fulfilled orders I have over the past month, and the total amount of money I spent."
+50,val,3,"Today is 6/12/2023. Tell me how many fulfilled orders I have over the past year, and the total amount of money I spent."
+51,val,3,"Today is 6/12/2023. Tell me how many fulfilled orders I have over the past six month, and the total amount of money I spent."
+150,val,3,What is the price configuration of the fake tree I bought Jan 2023
+158,val,3,"I have a lot of Nintendo Switch game cards now, help me find the best storage option to fit all 11 cards"
+161,val,3,"I have a lot of Nintendo Switch game cards now, help me find the best storage option to fit all 23 cards"
+163,val,3,What are the main criticisms of this product? Please extract the relevant sentences.
+190,val,3,Tell me the total cost of my latest complete order?
+227,val,3,What is the price range for products from EYZUTAK?
+241,val,3,"I am doing a market survey for one stop market, show me the most expensive product from skin care tool category"
+264,val,3,"I want to browse the products in the Cabinets, Racks & Shelves category"
+269,val,3,"Show me products under $25 in ""women shoes"" category"
+270,val,3,"Show me products under $30 in ""men shoes"" category"
+272,val,3,"Show me products under $78 in ""children dental care"" category"
+275,val,3,"Search for ""xbox"""
+283,val,3,Look up the most recent models of XBox controllers released between 2020-2021?
+284,val,3,Show the least expensive shoe storage with a minimum storage capacity of 12 pairs.
+362,val,3,Show me the billing address for order number 00178.
+368,val,3,find discounted items.
+388,val,3,Who gave 1 or 2 stars for phone cases from EYZUTAK
+506,val,3,Buy the highest rated product from the meat substitute category within a budget between 100 and 200.
+517,val,3,Add this product to my wishlist
+529,val,3,"Draft a refund message via their ""contact us"" form for the bluetooth speaker I bought Feb 2023. It broke after three days of use. The shop requires the order id, the reason and the amount to refund in the message. Don't submit yet"
+575,val,3,"I recently moved, my address is 222 Redwood Rise, Suite 300, Seattle, WA, 98101, update my information on OneStopShopping accordingly"
+690,val,3,Draft an email to the shop owner via their contact us function for a coupon as they promised me a coupon last time
+795,val,3,"Change the delivery address for my most recent order to 6726 McPherson Blvd, Pittsburgh, PA."
+798,val,3,"Change the delivery address for my most recent order to 77 Massachusetts Ave, Cambridge, MA."
