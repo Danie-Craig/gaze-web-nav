@@ -82,7 +82,7 @@ GAZE_PORT = 4242
 TASK_URL = "http://liralabwidowx-alienware-aurora-r16.tail4d611e.ts.net:8082"
 OUTPUT_DIR = "./recordings"
 
-GAZE_ENABLED = False          # set True once GazePoint is calibrated and streaming
+GAZE_ENABLED = True          # set True once GazePoint is calibrated and streaming
 
 # Start already-logged-in by loading a Playwright storage-state JSON (cookies), so the
 # login steps don't pollute the trajectory and the human starts in the same state the
